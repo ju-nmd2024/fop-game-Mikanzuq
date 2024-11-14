@@ -57,7 +57,8 @@ function draw() {
 // }
 
 //game screen
-
+let y = 100;
+let speed = 0.5;
 // bird cage
 function draw() {
   background(241, 212, 255);
@@ -169,5 +170,10 @@ function draw() {
     pop();
   }
   Cage(10, -80, 1.2); //cage done function
-  Bird(450, 300, 1.2);
+
+  // first try bird animation
+  Bird(400, y - 70, 1.2);
+  // y = y + speed ;
+  // if (y > 630 || y < 180 );
+  // speed = speed * 1;
 }
