@@ -5,15 +5,16 @@ function setup() {
 function draw() {
   background(241, 212, 255);
 }
-// birblander start
+
+// // birblander start
 let x = 300; // variable x
 let y = 400;
-let w = 150;
-let h = 200;
+let w = 150; // weight
+let h = 200; // height
 let q = 375; // variable x for "birblander"
 let z = 350; // variable y for "birblander"
 let ts = 70; // text size for
-let speed = 2; // speed of animaton "birblander"
+let speed = 1; // speed of animaton "birblander"
 
 d = 1; // variable for color in rect
 
@@ -54,3 +55,5 @@ function mouseClicked() {
     d = 2;
   }
 }
+
+//game screen
