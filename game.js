@@ -6,13 +6,18 @@ let x = 300;
 let y = 400;
 let w = 150; // weight
 let h = 200; // height
+
+// text variables:
 let q = 375; // variable x for "texts"
 let z = 350; // variable y for "texts"
 let s = 150; // end screen button size
 let ts = 70; // text size for
 let speed = 1; // speed of animaton "birblander"
+
+// bird variables;
+let birdY = 180;
 let birdSpeed = 2; // Speed of the bird
-let stopPunkt = 790; // where bird should stop
+let stopPunkt = 570; // where bird should stop
 d = 1; // variable for color in rect
 
 // game's logic:
@@ -159,12 +164,12 @@ function Cage(x, y, s) {
 function GameScreen() {
   background(241, 70, 90);
   push();
-  Bird(500, y - 220, 1.3);
-  if (y < stopPunkt) {
+  Bird(500, birdY, 1.3);
+  if (birdY < stopPunkt) {
     // a statement to make bird go down and stop at one point
-    y += birdSpeed; // new statement
+    birdY += birdSpeed; // new statement
   } else {
-    y = stopPunkt;
+    birdY = stopPunkt;
   }
   // // if (y <= 790) { // orginal statement
   // //   y = y / 0.98;
@@ -184,7 +189,7 @@ function endScreen() {
   noStroke();
   endButton();
 
-  fill(0, 0, 0); // birblander text
+  fill(0, 0, 0); // score text
   textSize(ts);
   text("You landed!", q - 160, z - 60);
   z = z - speed;
@@ -206,16 +211,30 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     GameScreen();
-  } else if (state === "results") {
+  } else if (state === "result") {
     endScreen();
   }
 }
 
 //Start screen
 function mouseClicked() {
-  // mouse cliked to change color of button and see clicked
-  if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
-    console.log("Clicked");
+  if (
+    state === "start" &&
+    mouseX > x &&
+    mouseX < x + w &&
+    mouseY > y &&
+    mouseY < y + h
+  ) {
+    console.log("Start clicked");
+    d = 2;
+    state = "game";
+  } else if (state === "game") {
+    state = "result";
+  } else if (
+    state === "result" &&
+    dist(mouseX, mouseY, x + 100, y + 60) < s / 2
+  ) {
+    console.log("again cliked");
     d = 2;
     state = "game";
   }
@@ -224,11 +243,12 @@ function mouseClicked() {
 //game screen:
 
 //end screen:
-push();
-function mousePressed() {
-  if (dist(mouseX, mouseY, x + 100, y + 60) < s / 2) {
-    console.log("again");
-    d = 2;
-  }
-}
-pop();
+// push();
+// function mouseCliked() {
+// let distance = (dist(mouseX, mouseY, x + 100, y + 60) < s / 2);
+// if (distance === endButton) {
+//   console.log("again clicked");
+//   d = 2;
+// }
+// }
+// pop();
