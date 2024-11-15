@@ -1,24 +1,30 @@
 function setup() {
   createCanvas(800, 800);
 }
-
-let x = 300; // variable x
+// position:
+let x = 300;
 let y = 400;
 let w = 150; // weight
 let h = 200; // height
-let q = 375; // variable x for "birblander"
-let z = 350; // variable y for "birblander"
+let q = 375; // variable x for "texts"
+let z = 350; // variable y for "texts"
+let s = 150; // end screen button size
 let ts = 70; // text size for
 let speed = 1; // speed of animaton "birblander"
 let birdSpeed = 2; // Speed of the bird
 let stopPunkt = 790; // where bird should stop
 d = 1; // variable for color in rect
 
+// game's logic:
+
+// game state:
+
 //start screen:
 function button() {
   // start button
   rect(x, y, h, w);
-} //buton
+}
+
 function startScreen() {
   background(255, 255, 255);
   if (d === 1) fill(255, 0, 120); // used yt video to learn
@@ -39,7 +45,7 @@ function startScreen() {
   else fill(70, 70, 70);
   textSize(ts - 20);
   text("S t a r t", x + 18, y + 90);
-} // whole start screen
+}
 
 //game screen:
 function Bird(x, y, s) {
@@ -122,7 +128,6 @@ function Bird(x, y, s) {
 
   pop();
 }
-
 function Cage(x, y, s) {
   push();
   translate(30, 10);
@@ -151,13 +156,7 @@ function Cage(x, y, s) {
     line(x, -200, x, 70);
   }
 }
-
-function draw() {
-  //start screen
-  // startScreen();
-
-  //game
-
+function GameScreen() {
   background(241, 70, 90);
   push();
   Bird(500, y - 220, 1.3);
@@ -167,13 +166,49 @@ function draw() {
   } else {
     y = stopPunkt;
   }
-  // if (y <= 790) { // orginal statement
-  //   y = y / 0.98;
-  // }
+  // // if (y <= 790) { // orginal statement
+  // //   y = y / 0.98;
+  // // }
   pop();
   Cage(10, -70, 1.2);
+}
 
-  // end screen
+// results screen
+function endButton() {
+  ellipse(x + 100, y + 60, s);
+}
+function endScreen() {
+  background(255, 255, 255);
+  if (d === 1) fill(255, 0, 120); // used yt video to learn
+  if (d === 2) fill(70, 70, 70);
+  noStroke();
+  endButton();
+
+  fill(0, 0, 0); // birblander text
+  textSize(ts);
+  text("You landed!", q - 160, z - 60);
+  z = z - speed;
+  if (z > 360 || z < 330) {
+    // animation so it moves
+    speed = speed * -1;
+  }
+
+  if (d === 2) fill(255, 255, 255); // make it change color when clicked
+  else fill(70, 70, 70);
+  textSize(ts - 20);
+  text("again", x + 38, y + 75);
+}
+
+let state = "start";
+
+function draw() {
+  if (state === "start") {
+    startScreen();
+  } else if (state === "game") {
+    GameScreen();
+  } else if (state === "results") {
+    endScreen();
+  }
 }
 
 //Start screen
@@ -182,9 +217,18 @@ function mouseClicked() {
   if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
     console.log("Clicked");
     d = 2;
+    state = "game";
   }
-} // function to press start button
+}
 
 //game screen:
 
 //end screen:
+push();
+function mousePressed() {
+  if (dist(mouseX, mouseY, x + 100, y + 60) < s / 2) {
+    console.log("again");
+    d = 2;
+  }
+}
+pop();
