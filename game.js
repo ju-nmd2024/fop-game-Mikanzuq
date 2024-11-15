@@ -13,16 +13,20 @@ let z = 350; // variable y for "texts"
 let s = 150; // end screen button size
 let ts = 70; // text size for
 let speed = 1; // speed of animaton "birblander"
+d = 1; // variable for color in rect
 
 // bird variables;
+let birdX = 520;
 let birdY = 180;
 let birdSpeed = 2; // Speed of the bird
 let stopPunkt = 570; // where bird should stop
-d = 1; // variable for color in rect
 
 // game's logic:
+let velocityY = 0.2;
+let accelaration = 0.1;
 
 // game state:
+let gameState = true;
 
 //start screen:
 function button() {
@@ -164,17 +168,22 @@ function Cage(x, y, s) {
 function GameScreen() {
   background(241, 70, 90);
   push();
+
   Bird(500, birdY, 1.3);
-  // if (birdY < stopPunkt) {
-  //   // a statement to make bird go down and stop at one point
-  //   birdY += birdSpeed; // new statement
-  // } else {
-  //   birdY = stopPunkt;
-  // }
-  if (birdY <= 570) {
-    // orginal statement
-    birdY = birdY / 0.99;
+  birdY = birdY + velocityY;
+  velocityY = velocityY + accelaration;
+
+  if (mouseIsPressed) {
+    velocityY = velocityY - 0.6;
   }
+
+  if (birdY > 570) {
+    birdY = 570;
+    velocityY = 0;
+    gameState = false;
+    console.log("dead");
+  }
+
   pop();
   Cage(10, -70, 1.2);
 }
@@ -229,17 +238,13 @@ function mouseClicked() {
     console.log("Start clicked");
     // d = 2;
     state = "game";
-  } else if (state === "game") {
-    state = "result";
-  } else if (
-    state === "result" &&
-    dist(mouseX, mouseY, x + 100, y + 60) < s / 2
-  ) {
-    console.log("again cliked");
-    // d = 2;
-    state = "game";
-    birdY = 180;
   }
+  // } else if (state === "game"){
+  //     state = "result";
+  // } else if ( state === "result" && dist(mouseX, mouseY, x + 100, y + 60) < s / 2) {
+  //   console.log("again cliked");
+  //   // d = 2;
+  //   state = "game";
 }
 
 //game screen:
