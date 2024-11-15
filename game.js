@@ -161,9 +161,15 @@ function draw() {
   background(241, 70, 90);
   push();
   Bird(500, y - 220, 1.3);
-  if (y <= 790) {
-    y = y / 0.98;
+  if (y < stopPunkt) {
+    // a statement to make bird go down and stop at one point
+    y += birdSpeed; // new statement
+  } else {
+    y = stopPunkt;
   }
+  // if (y <= 790) { // orginal statement
+  //   y = y / 0.98;
+  // }
   pop();
   Cage(10, -70, 1.2);
 
