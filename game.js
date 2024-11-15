@@ -183,6 +183,10 @@ function GameScreen() {
     gameState = false;
     console.log("dead");
   }
+  if (birdY <= 180 - 75) {
+    birdY = 180 - 75;
+    velocityY = +1;
+  }
 
   pop();
   Cage(10, -70, 1.2);
