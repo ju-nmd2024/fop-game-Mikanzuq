@@ -33,7 +33,7 @@ function button() {
 function startScreen() {
   background(255, 255, 255);
   if (d === 1) fill(255, 0, 120); // used yt video to learn
-  if (d === 2) fill(70, 70, 70);
+  // if (d === 2) fill(70, 70, 70);
   noStroke();
   button();
 
@@ -46,7 +46,7 @@ function startScreen() {
     speed = speed * -1;
   }
 
-  if (d === 2) fill(255, 255, 255); // make it change color when clicked
+  if (d === 1) fill(255, 255, 255); // make it change color when clicked
   else fill(70, 70, 70);
   textSize(ts - 20);
   text("S t a r t", x + 18, y + 90);
@@ -165,15 +165,16 @@ function GameScreen() {
   background(241, 70, 90);
   push();
   Bird(500, birdY, 1.3);
-  if (birdY < stopPunkt) {
-    // a statement to make bird go down and stop at one point
-    birdY += birdSpeed; // new statement
-  } else {
-    birdY = stopPunkt;
+  // if (birdY < stopPunkt) {
+  //   // a statement to make bird go down and stop at one point
+  //   birdY += birdSpeed; // new statement
+  // } else {
+  //   birdY = stopPunkt;
+  // }
+  if (birdY <= 570) {
+    // orginal statement
+    birdY = birdY / 0.99;
   }
-  // // if (y <= 790) { // orginal statement
-  // //   y = y / 0.98;
-  // // }
   pop();
   Cage(10, -70, 1.2);
 }
@@ -185,7 +186,7 @@ function endButton() {
 function endScreen() {
   background(255, 255, 255);
   if (d === 1) fill(255, 0, 120); // used yt video to learn
-  if (d === 2) fill(70, 70, 70);
+  // if (d === 2) fill(70, 70, 70);
   noStroke();
   endButton();
 
@@ -198,7 +199,7 @@ function endScreen() {
     speed = speed * -1;
   }
 
-  if (d === 2) fill(255, 255, 255); // make it change color when clicked
+  if (d === 1) fill(255, 255, 255); // make it change color when clicked
   else fill(70, 70, 70);
   textSize(ts - 20);
   text("again", x + 38, y + 75);
@@ -221,12 +222,12 @@ function mouseClicked() {
   if (
     state === "start" &&
     mouseX > x &&
-    mouseX < x + w &&
+    mouseX < x + h &&
     mouseY > y &&
-    mouseY < y + h
+    mouseY < y + w
   ) {
     console.log("Start clicked");
-    d = 2;
+    // d = 2;
     state = "game";
   } else if (state === "game") {
     state = "result";
@@ -235,20 +236,12 @@ function mouseClicked() {
     dist(mouseX, mouseY, x + 100, y + 60) < s / 2
   ) {
     console.log("again cliked");
-    d = 2;
+    // d = 2;
     state = "game";
+    birdY = 180;
   }
 }
 
 //game screen:
 
 //end screen:
-// push();
-// function mouseCliked() {
-// let distance = (dist(mouseX, mouseY, x + 100, y + 60) < s / 2);
-// if (distance === endButton) {
-//   console.log("again clicked");
-//   d = 2;
-// }
-// }
-// pop();
