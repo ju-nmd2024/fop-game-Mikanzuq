@@ -10,16 +10,16 @@ let h = 200; // height
 // text variables:
 let q = 375; // variable x for "texts"
 let z = 350; // variable y for "texts"
-let s = 150; // end screen button size
-let ts = 70; // text size for
-let speed = 1; // speed of animaton "birblander"
-d = 1; // variable for color in rect
+let s = 150;
+let ts = 70; // text size
+let speed = 1;
+d = 1;
 
 // bird variables;
 let birdX = 520;
 let birdY = 180;
-let birdSpeed = 2; // Speed of the bird
-let stopPunkt = 570; // where bird should stop
+let birdSpeed = 2;
+let stopPunkt = 570;
 
 // game's logic:
 let velocityY = 0.2;
@@ -192,7 +192,6 @@ function GameScreen() {
       state = "result";
     } else {
       console.log("you landed!");
-      birdY = 570;
       velocityY = 0;
       state = "result";
     }
@@ -202,30 +201,41 @@ function GameScreen() {
   Cage(10, -70, 1.2);
 }
 
-// results screen
+// result screen
 function endButton() {
   ellipse(x + 100, y + 60, s);
 }
 function endScreen() {
   background(255, 255, 255);
   if (d === 1) fill(255, 0, 120); // used yt video to learn
-  // if (d === 2) fill(70, 70, 70);
   noStroke();
   endButton();
 
+  if (d === 1) fill(255, 255, 255); // make it change color when clicked
+  textSize(ts - 20);
+  text("again", x + 38, y + 75);
+
   fill(0, 0, 0); // score text
   textSize(ts);
-  text("You landed!", q - 160, z - 60);
+
+  if (velocityY > 3) {
+    text("You died!", q - 120, z - 60);
+  } else {
+    text("You landed!!", q - 140, z - 60);
+  }
+
   z = z - speed;
   if (z > 360 || z < 330) {
     // animation so it moves
     speed = speed * -1;
   }
+}
 
-  if (d === 1) fill(255, 255, 255); // make it change color when clicked
-  else fill(70, 70, 70);
-  textSize(ts - 20);
-  text("again", x + 38, y + 75);
+function reset() {
+  velocityY = 0.2;
+  accelaration = 0.2;
+  birdY = 180;
+  state = "game";
 }
 
 let state = "start";
@@ -251,13 +261,20 @@ function mouseClicked() {
   ) {
     console.log("Start clicked");
     state = "game";
-    //   } else if ( state === "result" && dist(mouseX, mouseY, x + 100, y + 60) < s / 2) {
-    //     console.log("again cliked");
-    //     state = "game";
-    // }
+  } else if (
+    state === "result" &&
+    dist(mouseX, mouseY, x + 100, y + 60) < s / 2
+  ) {
+    console.log("again cliked");
+    reset();
   }
 }
 
 //game screen:
 
 //end screen:
+
+/* My sources: 
+
+
+*/
