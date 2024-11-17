@@ -38,7 +38,7 @@ function button() {
 }
 
 function startScreen() {
-  background(255, 255, 255);
+  background(25, 150, 125);
   if (d === 1) fill(255, 0, 120); // used yt video to learn
   // if (d === 2) fill(70, 70, 70);
   noStroke();
@@ -57,6 +57,8 @@ function startScreen() {
   else fill(70, 70, 70);
   textSize(ts - 20);
   text("S t a r t", x + 18, y + 90);
+
+  Bird(610, 650, 1.3);
 }
 
 //game screen:
@@ -245,7 +247,7 @@ function endButton() {
   ellipse(x + 100, y + 60, s);
 }
 function endScreen() {
-  background(255, 255, 255);
+  background(25, 150, 125);
   if (d === 1) fill(0, 0, 150); // used yt video to learn
   noStroke();
   endButton();
@@ -259,8 +261,12 @@ function endScreen() {
 
   if (velocityY > 3) {
     text("You killed the bird D: ", q - 280, z - 60);
+    Bird(650, 600, 1.2);
+    rotation += 5;
   } else {
     text("You landed :D", q - 160, z - 60);
+    Bird(650, 600, 1.2);
+    wings = "open";
   }
 
   z = z - speed;
