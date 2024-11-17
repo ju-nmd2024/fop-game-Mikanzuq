@@ -207,7 +207,7 @@ function endButton() {
 }
 function endScreen() {
   background(255, 255, 255);
-  if (d === 1) fill(255, 0, 120); // used yt video to learn
+  if (d === 1) fill(0, 0, 150); // used yt video to learn
   noStroke();
   endButton();
 
@@ -250,7 +250,7 @@ function draw() {
   }
 }
 
-//Start screen
+//when clicked:
 function mouseClicked() {
   if (
     state === "start" &&
@@ -269,10 +269,6 @@ function mouseClicked() {
     reset();
   }
 }
-
-//game screen:
-
-//end screen:
 
 /* My sources: 
 
