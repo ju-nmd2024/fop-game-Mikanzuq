@@ -20,10 +20,12 @@ let birdX = 520;
 let birdY = 180;
 let birdSpeed = 2;
 let stopPunkt = 570;
+let fallTimer = 0;
 
 // game's logic:
 let velocityY = 0.2;
-let accelaration = 0.2;
+let acceleration = 0.2;
+let rotation = 0;
 
 // game state:
 let gameState = true;
@@ -61,6 +63,7 @@ function Bird(x, y, s) {
   push();
   translate(x, y);
   scale(s);
+  rotate(rotation);
 
   // Bottom wing
   push();
@@ -172,7 +175,7 @@ function GameScreen() {
   // Make bird move and land
   Bird(500, birdY, 1.3);
   birdY = birdY + velocityY;
-  velocityY = velocityY + accelaration;
+  velocityY = velocityY + acceleration;
 
   if (keyIsDown(32)) {
     console.log("space is pressed");
@@ -185,19 +188,40 @@ function GameScreen() {
     birdY = 180 - 75;
     velocityY = +1;
   }
-
+  // actual game
   if (birdY > 570) {
     if (velocityY > 3) {
       console.log("you killed the bird");
-      state = "result";
+      state = "falling";
     } else {
       console.log("you landed!");
       velocityY = 0;
       state = "result";
     }
   }
-
   pop();
+  Cage(10, -70, 1.2);
+}
+
+// GameOver screen
+function fallingScreen() {
+  background(241, 70, 90);
+  Bird(500, birdY, 1.3);
+
+  velocityY = velocityY + acceleration;
+  birdY = birdY + velocityY;
+  rotation = rotation + 15;
+
+  fallTimer += 2;
+
+  if (fallTimer > 60) {
+    if (velocityY > 3) {
+      state = "result";
+    } else {
+      state = "result";
+    }
+    fallTimer = 0;
+  }
   Cage(10, -70, 1.2);
 }
 
@@ -235,6 +259,7 @@ function reset() {
   velocityY = 0.2;
   accelaration = 0.2;
   birdY = 180;
+  rotation = 0;
   state = "game";
 }
 
@@ -245,6 +270,8 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     GameScreen();
+  } else if (state === "falling") {
+    fallingScreen();
   } else if (state === "result") {
     endScreen();
   }
