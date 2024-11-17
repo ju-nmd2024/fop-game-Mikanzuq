@@ -23,7 +23,7 @@ let stopPunkt = 570; // where bird should stop
 
 // game's logic:
 let velocityY = 0.2;
-let accelaration = 0.1;
+let accelaration = 0.2;
 
 // game state:
 let gameState = true;
@@ -169,23 +169,33 @@ function GameScreen() {
   background(241, 70, 90);
   push();
 
+  // Make bird move and land
   Bird(500, birdY, 1.3);
   birdY = birdY + velocityY;
   velocityY = velocityY + accelaration;
 
-  if (mouseIsPressed) {
+  if (keyIsDown(32)) {
+    console.log("space is pressed");
     velocityY = velocityY - 0.6;
+  } else {
+    console.log("space is released");
   }
 
-  if (birdY > 570) {
-    birdY = 570;
-    velocityY = 0;
-    gameState = false;
-    console.log("dead");
-  }
   if (birdY <= 180 - 75) {
     birdY = 180 - 75;
     velocityY = +1;
+  }
+
+  if (birdY > 570) {
+    if (velocityY > 3) {
+      console.log("you killed the bird");
+      state = "result";
+    } else {
+      console.log("you landed!");
+      birdY = 570;
+      velocityY = 0;
+      state = "result";
+    }
   }
 
   pop();
@@ -240,15 +250,12 @@ function mouseClicked() {
     mouseY < y + w
   ) {
     console.log("Start clicked");
-    // d = 2;
     state = "game";
+    //   } else if ( state === "result" && dist(mouseX, mouseY, x + 100, y + 60) < s / 2) {
+    //     console.log("again cliked");
+    //     state = "game";
+    // }
   }
-  // } else if (state === "game"){
-  //     state = "result";
-  // } else if ( state === "result" && dist(mouseX, mouseY, x + 100, y + 60) < s / 2) {
-  //   console.log("again cliked");
-  //   // d = 2;
-  //   state = "game";
 }
 
 //game screen:
