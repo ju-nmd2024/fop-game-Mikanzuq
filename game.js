@@ -243,9 +243,9 @@ function endScreen() {
   textSize(ts);
 
   if (velocityY > 3) {
-    text("You died!", q - 120, z - 60);
+    text("You killed the bird D: ", q - 280, z - 60);
   } else {
-    text("You landed!!", q - 140, z - 60);
+    text("You landed :D", q - 160, z - 60);
   }
 
   z = z - speed;
