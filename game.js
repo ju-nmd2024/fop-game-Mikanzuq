@@ -21,6 +21,7 @@ let birdY = 180;
 let birdSpeed = 2;
 let stopPunkt = 570;
 let fallTimer = 0;
+let wings = "closed";
 
 // game's logic:
 let velocityY = 0.2;
@@ -69,7 +70,13 @@ function Bird(x, y, s) {
   push();
   angleMode(DEGREES);
   translate(-35, -35);
-  rotate(-10);
+
+  if (wings === "closed") {
+    rotate(-10);
+  } else if (wings === "open") {
+    rotate(-80);
+  }
+
   scale(0.3);
   noStroke();
   fill(255, 255, 255);
@@ -130,7 +137,13 @@ function Bird(x, y, s) {
   push();
   angleMode(DEGREES);
   translate(-9, -35);
-  rotate(-10);
+
+  if (wings === "closed") {
+    rotate(-10);
+  } else if (wings === "open") {
+    rotate(-40);
+  }
+
   scale(0.3);
   noStroke();
   fill(255, 255, 255);
@@ -180,8 +193,10 @@ function GameScreen() {
   if (keyIsDown(32)) {
     console.log("space is pressed");
     velocityY = velocityY - 0.6;
+    wings = "open";
   } else {
     console.log("space is released");
+    wings = "closed";
   }
 
   if (birdY <= 180 - 75) {
