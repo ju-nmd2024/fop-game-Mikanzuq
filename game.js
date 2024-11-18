@@ -26,7 +26,7 @@ let wings = "closed";
 // game's logic:
 let velocityY = 0.2;
 let acceleration = 0.2;
-let rotation = 0;
+let rotation = 0.2;
 
 // game state:
 let gameState = true;
@@ -247,7 +247,7 @@ function endButton() {
   ellipse(x + 100, y + 60, s);
 }
 function endScreen() {
-  background(25, 150, 125);
+  background(200, 200, 200);
   if (d === 1) fill(0, 0, 150); // used yt video to learn
   noStroke();
   endButton();
