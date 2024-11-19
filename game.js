@@ -39,8 +39,7 @@ function button() {
 
 function startScreen() {
   background(25, 150, 125);
-  if (d === 1) fill(255, 0, 120); // used yt video to learn
-  // if (d === 2) fill(70, 70, 70);
+  if (d === 1) fill(255, 0, 120); // used yt video to learn https://www.youtube.com/watch?v=kyN0pe42uhM
   noStroke();
   button();
 
@@ -53,8 +52,7 @@ function startScreen() {
     speed = speed * -1;
   }
 
-  if (d === 1) fill(255, 255, 255); // make it change color when clicked
-  else fill(70, 70, 70);
+  if (d === 1) fill(255, 255, 255); //  used yt video to learn https://www.youtube.com/watch?v=kyN0pe42uhM
   textSize(ts - 20);
   text("S t a r t", x + 18, y + 90);
 
@@ -74,6 +72,7 @@ function Bird(x, y, s) {
   translate(-35, -35);
 
   if (wings === "closed") {
+    // wings rotation
     rotate(-10);
   } else if (wings === "open") {
     rotate(-80);
@@ -141,6 +140,7 @@ function Bird(x, y, s) {
   translate(-9, -35);
 
   if (wings === "closed") {
+    // wings rotation
     rotate(-10);
   } else if (wings === "open") {
     rotate(-40);
@@ -202,6 +202,7 @@ function GameScreen() {
   }
 
   if (birdY <= 180 - 75) {
+    // bird start point
     birdY = 180 - 75;
     velocityY = +1;
   }
@@ -232,6 +233,7 @@ function fallingScreen() {
   fallTimer += 2;
 
   if (fallTimer > 60) {
+    // learned from Chat GPT how to use frames with timer
     if (velocityY > 3) {
       state = "result";
     } else {
@@ -248,11 +250,11 @@ function endButton() {
 }
 function endScreen() {
   background(200, 200, 200);
-  if (d === 1) fill(0, 0, 150); // used yt video to learn
+  if (d === 1) fill(0, 0, 150); // used yt video to learn  https://www.youtube.com/watch?v=kyN0pe42uhM
   noStroke();
   endButton();
 
-  if (d === 1) fill(255, 255, 255); // make it change color when clicked
+  if (d === 1) fill(255, 255, 255);
   textSize(ts - 20);
   text("again", x + 38, y + 75);
 
@@ -311,14 +313,9 @@ function mouseClicked() {
     state = "game";
   } else if (
     state === "result" &&
-    dist(mouseX, mouseY, x + 100, y + 60) < s / 2
+    dist(mouseX, mouseY, x + 100, y + 60) < s / 2 // yt video to learn https://www.youtube.com/watch?v=kyN0pe42uhM
   ) {
     console.log("again cliked");
     reset();
   }
 }
-
-/* My sources: 
-
-
-*/
