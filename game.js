@@ -254,7 +254,7 @@ function endScreen() {
   noStroke();
   endButton();
 
-  if (d === 1) fill(255, 255, 255);
+  if (d === 1) fill(255, 255, 255); // used yt video to learn  https://www.youtube.com/watch?v=kyN0pe42uhM
   textSize(ts - 20);
   text("again", x + 38, y + 75);
 
